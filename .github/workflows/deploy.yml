@@ -18,8 +18,10 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
 
         with:
-          server: ftpu.infinityfree.net          # Twój FTP host
+          server: ftpupload.net                 # Twój FTP host
           username: ${{ secrets.FTP_USERNAME }}  # Secret z GitHub
           password: ${{ secrets.FTP_PASSWORD }}  # Secret z GitHub
           local-dir: ./                           # Katalog z plikami do wysłania
           server-dir: /htdocs/                      # Katalog na serwerze
+          port: 21
+          protocol: ftp
