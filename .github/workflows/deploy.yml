@@ -15,7 +15,7 @@ jobs:
 
       # 2. Wgranie na FTP
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.1
         with:
           server: ftpu.infinityfree.net          # Twój FTP host
           username: ${{ secrets.FTP_USERNAME }}  # Secret z GitHub
