@@ -22,4 +22,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}  # Secret z GitHub
           password: ${{ secrets.FTP_PASSWORD }}  # Secret z GitHub
           local-dir: ./                           # Katalog z plikami do wysłania
-          server-dir: /htdocs                      # Katalog na serwerze
+          server-dir: /htdocs/                      # Katalog na serwerze
