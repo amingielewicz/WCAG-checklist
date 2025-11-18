@@ -483,7 +483,6 @@ function init() {
     updateSearchMatches();
     // Nie ustawiamy automatycznie focusu ani indeksu tutaj — Enter w polu wyszukiwania
     // przeniesie do pierwszego wyniku dzięki handleSearchKeyDown.
-    
     updateSectionVisibility();
     updateSearchInfo();
 }
@@ -561,6 +560,32 @@ function findSectionHeader(el) {
         }
     });
  }
+
+
+/**
+ * Obsługa Enter / Shift+Enter w wyszukiwaniu
+ */
+function handleSearchKeyDown(event) {
+    if (searchMatches.length === 0) return;
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        if (event.shiftKey) searchMatchIndex = (searchMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+        else searchMatchIndex = (searchMatchIndex + 1) % searchMatches.length;
+
+        const el = searchMatches[searchMatchIndex];
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+/**
+ * Aktualizacja tablicy wyników wyszukiwania
+ */
+function updateSearchMatches() {
+    const searchTerm = document.getElementById('searchBox')?.value.toLowerCase() || '';
+    if (searchTerm === '') { searchMatches = []; searchMatchIndex = -1; return; }
+    searchMatches = Array.from(document.querySelectorAll('.criterion:not(.hidden) label'));
+    searchMatchIndex = -1;
+}
 
  /**
  * Przełącza motyw (light/dark) i zapisuje preferencję w localStorage.
