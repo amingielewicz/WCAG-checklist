@@ -965,3 +965,24 @@ input[type="checkbox"]:focus {
     box-shadow: 0 6px 20px rgba(255, 213, 79, 0.12);
     background: linear-gradient(90deg, rgba(255,245,157,0.12), rgba(255,255,255,0.02));
 }
+
+/* Sekcja pomocy / opis funkcji */
+.help-section {
+    margin: 18px 0 26px 0;
+    padding: 14px 18px;
+    background: linear-gradient(180deg, #fbfdff 0%, #f1f6ff 100%);
+    border-left: 6px solid #667eea;
+    border-radius: 8px;
+    color: #2c3e50;
+    box-shadow: 0 2px 10px rgba(15,23,42,0.04);
+    font-size: 0.96rem;
+}
+.help-section h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
+    color: #2c3e50;
+}
+.help-section ul {
+    margin-left: 18px;
+    line-height: 1.5;
+}

@@ -13,6 +13,11 @@ window.addEventListener('DOMContentLoaded', function() {
     init();
 });
 
+/**
+ * Inicjalizuje aplikację: tryb, lokalne ustawienia, listener'y, oraz
+ * element progress-fill (jeśli nie istnieje).
+ * @returns {void}
+ */
 function init() {
     // Wczytaj tryb
     const savedTheme = localStorage.getItem('theme');
@@ -99,6 +104,10 @@ function init() {
      updateProgress();
  }
  
+ /**
+ * Dodaje listener'y do wszystkich checkboxów kryteriów.
+ * @returns {void}
+ */
  function addCheckboxListeners() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -124,6 +133,10 @@ function init() {
     });
  }
 
+ /**
+ * Aktualizuje pasek postępu i ARIA; oblicza procent i ustawia szerokość .progress-fill.
+ * @returns {void}
+ */
  function updateProgress() {
     const allCheckboxes = document.querySelectorAll('.criterion input[type="checkbox"]');
     const checkedCheckboxes = document.querySelectorAll('.criterion input[type="checkbox"]:checked');
@@ -152,6 +165,10 @@ function init() {
     updateLevelSummary();
  }
 
+ /**
+ * Aktualizuje podsumowanie (słupki) według poziomów A/AA/AAA.
+ * @returns {void}
+ */
  function updateLevelSummary() {
     const levels = ['A', 'AA', 'AAA'];
     
@@ -171,6 +188,10 @@ function init() {
     });
  }
 
+ /**
+ * Zaznacza wszystkie widoczne kryteria.
+ * @returns {void}
+ */
  function checkAll() {
     const checkboxes = document.querySelectorAll('.criterion:not(.hidden) input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -181,6 +202,10 @@ function init() {
     updateProgress();
  }
 
+ /**
+ * Odznacza wszystkie checkboxy.
+ * @returns {void}
+ */
  function uncheckAll() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -191,6 +216,10 @@ function init() {
     updateProgress();
  }
 
+ /**
+ * Eksportuje aktualny stan checkboxów do pliku JSON (pobranie).
+ * @returns {void}
+ */
  function saveProgress() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const state = {};
@@ -212,6 +241,10 @@ function init() {
     alert('✅ Postęp został zapisany do pliku!');
  }
 
+ /**
+ * Odczytuje plik JSON i ustawia stan checkboxów zgodnie z zawartością.
+ * @returns {void}
+ */
  function loadProgress() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -250,6 +283,10 @@ function init() {
     input.click();
  }
 
+ /**
+ * Zapisuje postęp do localStorage.
+ * @returns {void}
+ */
  // Zapis do localStorage (synchronous)
  function saveProgressToStorage() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -265,7 +302,10 @@ function init() {
     }
  }
 
- // Odczyt z localStorage
+ /**
+ * Wczytuje postęp z localStorage i aplikuje stan na checkboxach.
+ * @returns {void}
+ */
  function loadProgressFromStorage() {
     try {
         const raw = localStorage.getItem('wcag-progress');
@@ -288,6 +328,11 @@ function init() {
     }
  }
 
+ /**
+ * Przełącza filtr poziomu (A/AA/AAA) i aplikuje filtry.
+ * @param {string} level - 'A' | 'AA' | 'AAA'
+ * @returns {void}
+ */
  function toggleFilter(level) {
     activeFilters[level] = !activeFilters[level];
     const btn = document.getElementById('filter' + level);
@@ -299,6 +344,10 @@ function init() {
     applyFilters();
  }
 
+ /**
+ * Aplikuje aktywne filtry oraz wyszukiwanie do widoczności kryteriów.
+ * @returns {void}
+ */
  function applyFilters() {
     const criteria = document.querySelectorAll('.criterion');
     const searchTerm = document.getElementById('searchBox') ? document.getElementById('searchBox').value.toLowerCase() : '';
@@ -325,6 +374,10 @@ function init() {
     updateSearchInfo();
  }
 
+ /**
+ * Aktualizuje widoczność nagłówków / intro w zależności od wyszukiwania.
+ * @returns {void}
+ */
  function updateSectionVisibility() {
     const sections = document.querySelectorAll('h2, h3');
     const intros = document.querySelectorAll('.intro');
@@ -345,43 +398,10 @@ function init() {
     }
  }
 
- function updateSearchMatches() {
-    // Wszystkie widoczne kryteria traktujemy jako wyniki (searchCriteria już ukrywa niepasujące)
-    searchMatches = Array.from(document.querySelectorAll('.criterion:not(.hidden)'));
-    // Nie ustawiamy automatycznie zaznacenia — indeks ustawiamy na -1, aby wpisywanie nie traciło focusu.
-    searchMatchIndex = searchMatches.length ? -1 : -1;
-    // Usuń wcześniejsze zaznacenia wizualne (jeżeli były)
-    document.querySelectorAll('.search-current').forEach(n => n.classList.remove('search-current'));
-}
-
-function handleSearchKeyDown(e) {
-	if (e.key !== 'Enter') return;
-	e.preventDefault();
-	if (!searchMatches || searchMatches.length === 0) return;
-
-	if (e.shiftKey) {
-		// poprzedni wynik
-		searchMatchIndex = (searchMatchIndex - 1 + searchMatches.length) % searchMatches.length;
-	} else {
-		// następny wynik
-		searchMatchIndex = (searchMatchIndex + 1) % searchMatches.length;
-	}
-	focusSearchMatch();
-}
-
-function focusSearchMatch() {
-	const el = searchMatches[searchMatchIndex];
-	if (!el) return;
-	// usuń stare
-	document.querySelectorAll('.search-current').forEach(n => n.classList.remove('search-current'));
-	el.classList.add('search-current');
-
-	// ustaw fokus na zawartości kryterium (etykieta), przewiń płynnie
-	const content = el.querySelector('.criterion-content') || el;
-	if (content && typeof content.focus === 'function') content.focus();
-	el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
+ /**
+ * Aktualizuje informacje o wynikach wyszukiwania widoczne dla użytkownika.
+ * @returns {void}
+ */
  function updateSearchInfo() {
     const criteria = document.querySelectorAll('.criterion:not(.hidden)');
     const searchTerm = document.getElementById('searchBox') ? document.getElementById('searchBox').value.toLowerCase() : '';
@@ -404,6 +424,11 @@ function focusSearchMatch() {
     }
  }
 
+ /**
+ * Przeszukuje kryteria oraz nagłówki, podświetla dopasowania.
+ * Wyszukuje po tekście i nagłówkach; wykorzystuje highlightText().
+ * @returns {void}
+ */
  function searchCriteria() {
     const searchTerm = document.getElementById('searchBox') ? document.getElementById('searchBox').value.toLowerCase() : '';
     
@@ -463,7 +488,11 @@ function focusSearchMatch() {
     updateSearchInfo();
 }
 
-// Szuka najbliższego poprzedniego h2 lub h3 dla elementu (zakłada strukturę h2/h3 + kryteria jako rodzeństwo)
+/**
+ * Szuka najbliższego poprzedniego h2 lub h3 dla elementu (zakłada strukturę h2/h3 + kryteria jako rodzeństwo)
+ * @param {Element} el - element, dla którego szukamy nagłówka sekcji
+ * @returns {Element|null} - znaleziony nagłówek lub null
+ */
 function findSectionHeader(el) {
     let node = el.previousElementSibling;
     while (node) {
@@ -483,6 +512,12 @@ function findSectionHeader(el) {
     return null;
  }
 
+ /**
+ * Podświetla dopasowany fragment tekstu wewnątrz elementu.
+ * @param {Element} element - element DOM do przeszukania
+ * @param {string} searchTerm - fraza wyszukiwana (małe litery)
+ * @returns {void}
+ */
  function highlightText(element, searchTerm) {
     const walker = document.createTreeWalker(
         element,
@@ -527,7 +562,10 @@ function findSectionHeader(el) {
     });
  }
 
- /* Funkcja przełączania trybu (pozostawiona bez zmian logicznych) */
+ /**
+ * Przełącza motyw (light/dark) i zapisuje preferencję w localStorage.
+ * @returns {void}
+ */
  function toggleTheme() {
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
@@ -541,5 +579,4 @@ function findSectionHeader(el) {
     }
  }
 
-// (usunięto: updateW3CLinks — linki do W3C pozostają takie, jakie są w index.html)
 
