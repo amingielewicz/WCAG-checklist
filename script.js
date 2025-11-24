@@ -101,6 +101,9 @@ function init() {
         progressContainer.insertBefore(fill, progressContainer.firstChild);
     }
 
+    // Back-to-top: podłączenie zachowania
+    setupBackToTop();
+
      updateProgress();
  }
  
@@ -384,6 +387,9 @@ function init() {
     
     updateSectionVisibility();
     updateSearchInfo();
+
+    // Aktualizuj tablicę wyników po filtrowaniu (ważne dla nawigacji klawiaturą)
+    updateSearchMatches();
  }
 
  /**
@@ -411,7 +417,7 @@ function init() {
  }
 
  /**
- * Aktualizuje informacje o wynikach wyszukiwania widoczne dla użytkownika.
+ * Aktualizuje informacje o wynikach wyszukiwania widocne dla użytkownika.
  * @returns {void}
  */
  function updateSearchInfo() {
@@ -577,26 +583,159 @@ function findSectionHeader(el) {
 /**
  * Obsługa Enter / Shift+Enter w wyszukiwaniu
  */
-function handleSearchKeyDown(event) {
-    if (searchMatches.length === 0) return;
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        if (event.shiftKey) searchMatchIndex = (searchMatchIndex - 1 + searchMatches.length) % searchMatches.length;
-        else searchMatchIndex = (searchMatchIndex + 1) % searchMatches.length;
+function handleSearchKeyDown(e) {
+    const key = e.key;
+    const searchBox = document.getElementById('searchBox');
+    if (!searchBox) return;
 
-        const el = searchMatches[searchMatchIndex];
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Jeśli lista wyników jest pusta, Esc/Enter/strzałki mogą inicjować wyszukiwanie
+    if (key === 'Enter') {
+        e.preventDefault();
+        // Jeśli jakiś wynik jest podświetlony -> zatwierdź go
+        if (searchMatches.length > 0 && searchMatchIndex >= 0) {
+            acceptHighlighted();
+            return;
+        }
+        // Jeśli nie ma podświetlenia, ale są wyniki -> ustaw pierwsze jako aktywne (ponowne "enter")
+        if (searchMatches.length > 0 && searchMatchIndex === -1) {
+            searchMatchIndex = 0;
+            focusSearchMatch();
+            return;
+        }
+        // Brak wyników -> wykonaj wyszukiwanie
+        if (searchMatches.length === 0) {
+            searchCriteria();
+            return;
+        }
+    }
+
+    // Nawigacja po wynikach / podpowiedziach
+    if (['ArrowDown','ArrowUp','PageDown','PageUp','Home','End'].includes(key)) {
+        if (searchMatches.length === 0) {
+            // jeśli brak wyników, najpierw uruchom wyszukiwanie
+            searchCriteria();
+        }
+        e.preventDefault();
+        switch (key) {
+            case 'ArrowDown':
+                moveSearchIndex(1);
+                break;
+            case 'ArrowUp':
+                moveSearchIndex(-1);
+                break;
+            case 'PageDown':
+                moveSearchIndex(5);
+                break;
+            case 'PageUp':
+                moveSearchIndex(-5);
+                break;
+            case 'Home':
+                setSearchIndex(0);
+                break;
+            case 'End':
+                setSearchIndex(searchMatches.length - 1);
+                break;
+        }
     }
 }
 
 /**
- * Aktualizacja tablicy wyników wyszukiwania
+ * Przesuń aktywny indeks o delta (może być ujemne), z uwzględnieniem bounds
+ * @param {number} delta
+ */
+function moveSearchIndex(delta) {
+    if (!searchMatches || searchMatches.length === 0) return;
+    if (searchMatchIndex === -1) {
+        // jeśli nie ma aktywnego - ustaw na początek (dla dodatniego) lub koniec (dla ujemnego)
+        searchMatchIndex = delta > 0 ? 0 : searchMatches.length - 1;
+    } else {
+        searchMatchIndex = Math.min(Math.max(0, searchMatchIndex + delta), searchMatches.length - 1);
+    }
+    focusSearchMatch();
+}
+
+/**
+ * Ustaw indeks bez przesuwania relatywnego
+ * @param {number} idx
+ */
+function setSearchIndex(idx) {
+    if (!searchMatches || searchMatches.length === 0) return;
+    searchMatchIndex = Math.min(Math.max(0, idx), searchMatches.length - 1);
+    focusSearchMatch();
+}
+
+/**
+ * Skup uwagę na aktualnie wybranym wyniku (dodaje klasę .search-current, fokusuje etykietę i przewija)
+ */
+function focusSearchMatch() {
+    // usuń poprzednie podświetlenia
+    document.querySelectorAll('.search-current').forEach(n => n.classList.remove('search-current'));
+
+    const el = searchMatches[searchMatchIndex];
+    if (!el) return;
+    el.classList.add('search-current');
+
+    // skup fokus na etykiecie (dzięki temu czytniki + keyboard users widzą)
+    if (typeof el.focus === 'function') el.focus();
+
+    // przewiń do widoku
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/**
+ * Zatwierdza podświetlony wynik:
+ * - jeśli etykieta zawiera checkbox -> toggle + dispatch change
+ * - jeśli etykieta zawiera link -> otwórz / przejdź (tu: focus)
+ */
+function acceptHighlighted() {
+    if (!searchMatches || searchMatchIndex < 0) return;
+    const el = searchMatches[searchMatchIndex];
+    if (!el) return;
+
+    // Spróbuj znaleźć powiązany checkbox (label[for] lub input wewnątrz)
+    let checkbox = null;
+    if (el.tagName.toLowerCase() === 'label') {
+        const forId = el.getAttribute('for');
+        if (forId) checkbox = document.getElementById(forId);
+        if (!checkbox) checkbox = el.querySelector('input[type="checkbox"]');
+    } else {
+        checkbox = el.querySelector('input[type="checkbox"]') || el.parentElement.querySelector('input[type="checkbox"]');
+    }
+
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        checkbox.focus();
+        // odśwież wyniki po zmianie stanu (np. filtrowanie po visibility)
+        updateSearchMatches();
+        return;
+    }
+
+    // Jeśli nie checkbox, spróbuj kliknąć link w obrębie (jeśli potrzebne)
+    const link = el.querySelector('a[href]');
+    if (link) {
+        link.focus();
+        // nie wykonujemy automatycznego navigation; pozostawiamy focus (bez otwierania)
+    }
+}
+
+/**
+ * Aktualizuje tablicę wyników wyszukiwania (etykiety widocznych kryteriów)
+ * oraz koryguje obecny indeks jeżeli przekracza nowe bounds.
  */
 function updateSearchMatches() {
     const searchTerm = document.getElementById('searchBox')?.value.toLowerCase() || '';
-    if (searchTerm === '') { searchMatches = []; searchMatchIndex = -1; return; }
+    if (searchTerm === '') {
+        searchMatches = [];
+        searchMatchIndex = -1;
+        // usuń ewentualne wizualne podświetlenia
+        document.querySelectorAll('.search-current').forEach(n => n.classList.remove('search-current'));
+        return;
+    }
+    // lista etykiet widocznych kryteriów
     searchMatches = Array.from(document.querySelectorAll('.criterion:not(.hidden) label'));
-    searchMatchIndex = -1;
+    if (searchMatchIndex >= searchMatches.length) searchMatchIndex = searchMatches.length - 1;
+    if (searchMatches.length === 0) searchMatchIndex = -1;
 }
 
  /**
@@ -615,5 +754,36 @@ function updateSearchMatches() {
         localStorage.setItem('theme', 'light');
     }
  }
+
+ /**
+ * Inicjalizuje przycisk "back to top": pokazuje go po przewinięciu i obsługuje kliknięcie.
+ * @returns {void}
+ */
+function setupBackToTop() {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    // Kliknięcie - płynne przewinięcie na górę
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // po przewinięciu przenieś fokus na główną treść dla accesibility
+        const main = document.getElementById('mainContent');
+        if (main) main.focus({ preventScroll: true });
+    });
+
+    // Pokaż/ukryj przy przewijaniu
+    const threshold = 200;
+    function onScroll() {
+        if (window.scrollY > threshold) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // initial check
+    onScroll();
+}
 
 

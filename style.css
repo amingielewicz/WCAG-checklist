@@ -986,3 +986,109 @@ input[type="checkbox"]:focus {
     margin-left: 18px;
     line-height: 1.5;
 }
+
+/* Back-to-top */
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    /* nowy, kontrastowy kolor (ciepły pomarańcz) */
+    background: linear-gradient(135deg, #ff7a18 0%, #ff9500 100%);
+    color: white; /* svg korzysta z currentColor */
+    border: none;
+    box-shadow: 0 8px 24px rgba(34, 34, 34, 0.22);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 200ms ease, opacity 200ms ease, visibility 200ms;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1200;
+    outline: none;
+}
+.back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(34,34,34,0.28);
+}
+.back-to-top:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 4px;
+}
+
+/* Widoczne */
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mniejszy przycisk na mobilkach */
+@media (max-width: 480px) {
+    .back-to-top {
+        right: 12px;
+        bottom: 18px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Dark mode */
+body.dark-mode .back-to-top {
+    /* ciemniejszy wariant pomarańczu w dark mode */
+    background: linear-gradient(135deg, #c75b00 0%, #a33e00 100%);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.65);
+}
+
+/* Ulepszenia widoczności ikony back-to-top */
+.back-to-top {
+    /* delikatnie wzmocniony outline/ring i cień by odróżnić od tła */
+    box-shadow:
+        0 8px 22px rgba(34,34,34,0.20),
+        0 0 0 4px rgba(255,255,255,0.06) inset;
+    /* dopasowany kontrastowy kolor (powiązany z gradientem) */
+    background-color: rgba(255,122,24,0.98);
+}
+
+/* Styl dla elementów SVG wewnątrz przycisku */
+.back-to-top svg {
+    display: block;
+}
+
+/* Wyraźna, gruba kreska strzałki */
+.back-to-top svg .arrow {
+    /* nowy kolor samej strzałki (zmień na dowolny hex) */
+    stroke: #0b3d91 !important;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    /* delikatny cień dla lepszej czytelności */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+/* Dodatkowy ring poza przyciskiem (subtelny, aby nie psuć estetyki) */
+.back-to-top::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    pointer-events: none;
+    /* ring w tonacji pomarańczu dla lepszej czytelności na szarym tle */
+    box-shadow: 0 0 0 3px rgba(255,122,24,0.10);
+    opacity: 1;
+    transition: opacity 180ms ease;
+}
+
+/* W trybie ciemnym dopasuj ring i cień */
+body.dark-mode .back-to-top {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    box-shadow:
+        0 8px 22px rgba(0,0,0,0.55),
+        0 0 0 4px rgba(0,0,0,0.12) inset;
+}
+body.dark-mode .back-to-top::after {
+    box-shadow: 0 0 0 3px rgba(199,91,0,0.12);
+}

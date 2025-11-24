@@ -1110,7 +1110,17 @@
       </p>
       <p style="margin: 5px 0 0 0">© 2025</p>
     </div>
-  </div>
+  </div> <!-- .container -->
+
+  <!-- Back-to-top button: widoczny po przewinięciu, focusowalny -->
+  <button id="backToTop" class="back-to-top" aria-label="Przejdź na początek strony" title="Do góry">
+    <!-- SVG: wyraźniejszy chevron-up w kółku -->
+    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" role="img">
+      <circle cx="12" cy="12" r="11" fill="currentColor" opacity="0.96"></circle>
+      <!-- grubiej rysowana, kontrastująca strzałka -->
+      <path class="arrow" d="M16 14 L12 10 L8 14" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+    </svg>
+  </button>
 </body>
 <script src="script.js" defer></script>
 </html>
