@@ -351,6 +351,15 @@ function init() {
  function applyFilters() {
     const criteria = document.querySelectorAll('.criterion');
     const searchTerm = document.getElementById('searchBox') ? document.getElementById('searchBox').value.toLowerCase() : '';
+
+    // Jeśli jest fraza wyszukiwania, przygotuj mapę nagłówków (h2/h3),
+    // aby uwzględniać kryteria, które pasują przez dopasowanie nagłówka sekcji.
+    const headerMatches = new Map();
+    if (searchTerm !== '') {
+        document.querySelectorAll('h2, h3').forEach(h => {
+            headerMatches.set(h, h.textContent.toLowerCase().includes(searchTerm));
+        });
+    }
     
     criteria.forEach(criterion => {
         const badge = criterion.querySelector('.level-badge');
@@ -360,7 +369,10 @@ function init() {
         let matchesSearch = true;
         if (searchTerm !== '') {
             const text = criterion.textContent.toLowerCase();
-            matchesSearch = text.includes(searchTerm);
+            // sprawdź także, czy nagłówek sekcji pasuje do wyszukiwania
+            const header = findSectionHeader(criterion);
+            const headerMatch = header ? headerMatches.get(header) : false;
+            matchesSearch = text.includes(searchTerm) || headerMatch;
         }
         
         if (matchesFilter && matchesSearch) {
@@ -489,7 +501,7 @@ function init() {
 
 /**
  * Szuka najbliższego poprzedniego h2 lub h3 dla elementu (zakłada strukturę h2/h3 + kryteria jako rodzeństwo)
- * @param {Element} el - element, dla którego szukamy nagłówka sekcji
+ * @param {Element} el - element, dla którego szukamy nagłówek sekcji
  * @returns {Element|null} - znaleziony nagłówek lub null
  */
 function findSectionHeader(el) {
