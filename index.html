@@ -17,14 +17,11 @@
     </div>
 
     <div class="controls">
+      <button id="btnToggleAll" type="button" class="btn btn-success" aria-pressed="false">
+        ✓ Zaznacz / Odznacz wszystko
+      </button>
       <button id="btnPrint" type="button" class="btn btn-primary">
         🖨️ Drukuj
-      </button>
-      <button id="btnCheckAll" type="button" class="btn btn-success">
-        ✓ Zaznacz wszystko
-      </button>
-      <button id="btnUncheckAll" type="button" class="btn btn-danger">
-        ✗ Odznacz wszystko
       </button>
       <button id="btnSaveProgress" type="button" class="btn btn-info">
         💾 Zapisz postęp
@@ -79,8 +76,8 @@
 
     <h3>1.1 Tekst alternatywny</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-1-1" onchange="updateProgress()" />
       <label for="1-1-1" class="criterion-content">
+        <input type="checkbox" id="1-1-1" onchange="updateProgress()" />
         <strong>1.1.1 Treść alternatywna</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#tresc-nietekstowa" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#non-text-content" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -91,8 +88,8 @@
 
     <h3>1.2. Multimedia</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-2-1" onchange="updateProgress()" />
       <label for="1-2-1" class="criterion-content">
+        <input type="checkbox" id="1-2-1" onchange="updateProgress()" />
         <strong>1.2.1 Tylko audio lub tylko wideo (nagranie)</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#tylko-audio-lub-tylko-wideo-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#audio-only-and-video-only-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -102,8 +99,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-2-2" onchange="updateProgress()" />
       <label for="1-2-2" class="criterion-content">
+        <input type="checkbox" id="1-2-2" onchange="updateProgress()" />
         <strong>1.2.2 Napisy rozszerzone (nagranie)</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#napisy-rozszerzone-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#captions-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -113,8 +110,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-2-3" onchange="updateProgress()" />
       <label for="1-2-3" class="criterion-content">
+        <input type="checkbox" id="1-2-3" onchange="updateProgress()" />
         <strong>1.2.3 Audiodeskrypcja lub alternatywa dla mediów (nagranie)</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#audiodeskrypcja-lub-alternatywa-tekstowa-dla-mediow-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#audio-description-or-media-alternative-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -125,8 +122,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-2-4" onchange="updateProgress()" />
       <label for="1-2-4" class="criterion-content">
+        <input type="checkbox" id="1-2-4" onchange="updateProgress()" />
         <strong>1.2.4 Napisy rozszerzone (na żywo)</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#napisy-rozszerzone-na-zywo" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#captions-live" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -137,8 +134,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-2-5" onchange="updateProgress()" />
       <label for="1-2-5" class="criterion-content">
+        <input type="checkbox" id="1-2-5" onchange="updateProgress()" />
         <strong>1.2.5 Audiodeskrypcja (nagranie)</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#audiodeskrypcja-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#audio-description-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -148,8 +145,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-2-6" onchange="updateProgress()" />
       <label for="1-2-6" class="criterion-content">
+        <input type="checkbox" id="1-2-6" onchange="updateProgress()" />
         <strong>1.2.6 Język migowy (nagranie)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#jezyk-migowy-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#sign-language-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -159,8 +156,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-2-7" onchange="updateProgress()" />
       <label for="1-2-7" class="criterion-content">
+        <input type="checkbox" id="1-2-7" onchange="updateProgress()" />
         <strong>1.2.7 Rozszerzona audiodeskrypcja (nagranie)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#rozszerzona-audiodeskrypcja-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#extended-audio-description-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -170,8 +167,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-2-8" onchange="updateProgress()" />
       <label for="1-2-8" class="criterion-content">
+        <input type="checkbox" id="1-2-8" onchange="updateProgress()" />
         <strong>1.2.8 Alternatywa dla mediów (nagranie)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#alternatywa-dla-mediow-nagranie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#media-alternative-prerecorded" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -182,8 +179,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-2-9" onchange="updateProgress()" />
       <label for="1-2-9" class="criterion-content">
+        <input type="checkbox" id="1-2-9" onchange="updateProgress()" />
         <strong>1.2.9 Tylko audio (na żywo)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#tylko-audio-na-zywo" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#audio-only-live" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -194,8 +191,8 @@
 
     <h3>1.3. Możliwość adaptacji</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-3-1" onchange="updateProgress()" />
       <label for="1-3-1" class="criterion-content">
+        <input type="checkbox" id="1-3-1" onchange="updateProgress()" />
         <strong>1.3.1 Informacje i relacje</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#informacje-i-relacje" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#info-and-relationships" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -205,8 +202,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-3-2" onchange="updateProgress()" />
       <label for="1-3-2" class="criterion-content">
+        <input type="checkbox" id="1-3-2" onchange="updateProgress()" />
         <strong>1.3.2 Zrozumiała kolejność</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#zrozumia-a-kolejnosc" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#meaningful-sequence" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -216,8 +213,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-3-3" onchange="updateProgress()" />
       <label for="1-3-3" class="criterion-content">
+        <input type="checkbox" id="1-3-3" onchange="updateProgress()" />
         <strong>1.3.3 Charakterystyka zmysłowa</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#w-asciwosci-zmys-owe" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#sensory-characteristics" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -227,8 +224,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-3-4" onchange="updateProgress()" />
       <label for="1-3-4" class="criterion-content">
+        <input type="checkbox" id="1-3-4" onchange="updateProgress()" />
         <strong>1.3.4 Orientacja</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#orientacja" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#orientation" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -238,8 +235,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-3-5" onchange="updateProgress()" />
       <label for="1-3-5" class="criterion-content">
+        <input type="checkbox" id="1-3-5" onchange="updateProgress()" />
         <strong>1.3.5 Identyfikacja celu wprowadzania danych</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#okreslenie-pozadanej-wartosci" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#identify-input-purpose" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -249,8 +246,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-3-6" onchange="updateProgress()" />
       <label for="1-3-6" class="criterion-content">
+        <input type="checkbox" id="1-3-6" onchange="updateProgress()" />
         <strong>1.3.6 Identyfikacja celu (rozszerzona)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#okreslenie-przeznaczenia" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#identify-purpose" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -261,8 +258,8 @@
 
     <h3>1.4. Rozróżnialność</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-4-1" onchange="updateProgress()" />
       <label for="1-4-1" class="criterion-content">
+        <input type="checkbox" id="1-4-1" onchange="updateProgress()" />
         <strong>1.4.1 Użycie koloru</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#uzycie-koloru" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#use-of-color" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -271,8 +268,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="1-4-2" onchange="updateProgress()" />
       <label for="1-4-2" class="criterion-content">
+        <input type="checkbox" id="1-4-2" onchange="updateProgress()" />
         <strong>1.4.2 Kontrola odtwarzania dźwięku</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#kontrola-odtwarzania-dzwieku" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#audio-control" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -282,8 +279,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-3" onchange="updateProgress()" />
       <label for="1-4-3" class="criterion-content">
+        <input type="checkbox" id="1-4-3" onchange="updateProgress()" />
         <strong>1.4.3 Minimalny kontrast</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#kontrast-minimum" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#contrast-minimum" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -293,8 +290,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-4" onchange="updateProgress()" />
       <label for="1-4-4" class="criterion-content">
+        <input type="checkbox" id="1-4-4" onchange="updateProgress()" />
         <strong>1.4.4 Zmiana rozmiaru tekstu</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#zmiana-rozmiaru-tekstu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#resize-text" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -304,8 +301,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-5" onchange="updateProgress()" />
       <label for="1-4-5" class="criterion-content">
+        <input type="checkbox" id="1-4-5" onchange="updateProgress()" />
         <strong>1.4.5 Obrazy tekstu</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#obrazy-tekstu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#images-of-text" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -314,8 +311,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-4-6" onchange="updateProgress()" />
       <label for="1-4-6" class="criterion-content">
+        <input type="checkbox" id="1-4-6" onchange="updateProgress()" />
         <strong>1.4.6 Kontrast (wzmocniony)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#kontrast-wzmocniony" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#contrast-enhanced" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -325,8 +322,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-4-7" onchange="updateProgress()" />
       <label for="1-4-7" class="criterion-content">
+        <input type="checkbox" id="1-4-7" onchange="updateProgress()" />
         <strong>1.4.7 Niska głośność lub bez dźwięków w tle</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#niska-g-osnosc-lub-bez-dzwiekow-w-tle" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#low-or-no-background-audio" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -335,8 +332,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-4-8" onchange="updateProgress()" />
       <label for="1-4-8" class="criterion-content">
+        <input type="checkbox" id="1-4-8" onchange="updateProgress()" />
         <strong>1.4.8 Prezentacja wizualna</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#prezentacja-wizualna" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#visual-presentation" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -346,8 +343,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="1-4-9" onchange="updateProgress()" />
       <label for="1-4-9" class="criterion-content">
+        <input type="checkbox" id="1-4-9" onchange="updateProgress()" />
         <strong>1.4.9 Obrazy tekstu (bez wyjątków)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#obrazy-tekstu-bez-wyjatkow" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#images-of-text-no-exception" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -357,8 +354,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-10" onchange="updateProgress()" />
       <label for="1-4-10" class="criterion-content">
+        <input type="checkbox" id="1-4-10" onchange="updateProgress()" />
         <strong>1.4.10 Reflow - dopasowanie do ekranu</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#dopasowanie-do-ekranu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#reflow" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -368,8 +365,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-11" onchange="updateProgress()" />
       <label for="1-4-11" class="criterion-content">
+        <input type="checkbox" id="1-4-11" onchange="updateProgress()" />
         <strong>1.4.11 Kontrast elementów nietekstowych</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#kontrast-elementow-nietekstowych" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#non-text-contrast" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -379,8 +376,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-12" onchange="updateProgress()" />
       <label for="1-4-12" class="criterion-content">
+        <input type="checkbox" id="1-4-12" onchange="updateProgress()" />
         <strong>1.4.12 Odstępy w tekście</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#odstepy-w-tekscie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#text-spacing" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -390,8 +387,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="1-4-13" onchange="updateProgress()" />
       <label for="1-4-13" class="criterion-content">
+        <input type="checkbox" id="1-4-13" onchange="updateProgress()" />
         <strong>1.4.13 Treść na wskazaniu lub fokusie</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#tresc-spod-kursora-lub-fokusu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#content-on-hover-or-focus" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -408,8 +405,8 @@
 
     <h3>2.1. Dostęp z klawiatury</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-1-1" onchange="updateProgress()" />
       <label for="2-1-1" class="criterion-content">
+        <input type="checkbox" id="2-1-1" onchange="updateProgress()" />
         <strong>2.1.1 Klawiatura</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#klawiatura" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#keyboard" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -418,8 +415,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-1-2" onchange="updateProgress()" />
       <label for="2-1-2" class="criterion-content">
+        <input type="checkbox" id="2-1-2" onchange="updateProgress()" />
         <strong>2.1.2 Brak pułapki na klawiaturę</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#bez-pu-apki-na-klawiature" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#no-keyboard-trap" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -429,8 +426,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-1-3" onchange="updateProgress()" />
       <label for="2-1-3" class="criterion-content">
+        <input type="checkbox" id="2-1-3" onchange="updateProgress()" />
         <strong>2.1.3 Klawiatura (bez wyjątków)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#klawiatura-bez-wyjatkow" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#keyboard-no-exception" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -440,8 +437,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-1-4" onchange="updateProgress()" />
       <label for="2-1-4" class="criterion-content">
+        <input type="checkbox" id="2-1-4" onchange="updateProgress()" />
         <strong>2.1.4 Jednoznakowe skróty klawiszowe</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#jednoznakowe-skroty-klawiaturowe" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#character-key-shortcuts" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -452,8 +449,8 @@
 
     <h3>2.2 Wystarczający czas</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-2-1" onchange="updateProgress()" />
       <label for="2-2-1" class="criterion-content">
+        <input type="checkbox" id="2-2-1" onchange="updateProgress()" />
         <strong>2.2.1 Możliwość regulacji czasu</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#dostosowanie-czasu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#timing-adjustable" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -462,8 +459,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-2-2" onchange="updateProgress()" />
       <label for="2-2-2" class="criterion-content">
+        <input type="checkbox" id="2-2-2" onchange="updateProgress()" />
         <strong>2.2.2 Pauza, zatrzymanie, ukrycie</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#pauza-zatrzymanie-ukrycie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#pause-stop-hide" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -472,8 +469,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-2-3" onchange="updateProgress()" />
       <label for="2-2-3" class="criterion-content">
+        <input type="checkbox" id="2-2-3" onchange="updateProgress()" />
         <strong>2.2.3 Bez ograniczeń czasowych</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#bez-ograniczen-czasowych" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#no-timing" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -483,8 +480,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-2-4" onchange="updateProgress()" />
       <label for="2-2-4" class="criterion-content">
+        <input type="checkbox" id="2-2-4" onchange="updateProgress()" />
         <strong>2.2.4 Przerywanie</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#przerywanie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#interruptions" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -493,8 +490,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-2-5" onchange="updateProgress()" />
       <label for="2-2-5" class="criterion-content">
+        <input type="checkbox" id="2-2-5" onchange="updateProgress()" />
         <strong>2.2.5 Ponowne potwierdzenie autentyczności</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#ponowne-potwierdzenie-autentycznosci" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#re-authenticating" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -503,8 +500,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-2-6" onchange="updateProgress()" />
       <label for="2-2-6" class="criterion-content">
+        <input type="checkbox" id="2-2-6" onchange="updateProgress()" />
         <strong>2.2.6 Ostrzeżenie o limicie czasu</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#ostrzezenie-o-limicie-czasu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#timeouts" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -514,8 +511,8 @@
 
     <h3>2.3 Napady i reakcje fizyczne</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-3-1" onchange="updateProgress()" />
       <label for="2-3-1" class="criterion-content">
+        <input type="checkbox" id="2-3-1" onchange="updateProgress()" />
         <strong>2.3.1 Trzy błyski lub mniej</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#trzy-b-yski-lub-wartosci-ponizej-progu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#three-flashes-or-below-threshold" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -525,8 +522,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-3-2" onchange="updateProgress()" />
       <label for="2-3-2" class="criterion-content">
+        <input type="checkbox" id="2-3-2" onchange="updateProgress()" />
         <strong>2.3.2 Trzy błyski</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#trzy-b-yski" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#three-flashes" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -535,8 +532,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-3-3" onchange="updateProgress()" />
       <label for="2-3-3" class="criterion-content">
+        <input type="checkbox" id="2-3-3" onchange="updateProgress()" />
         <strong>2.3.3 Animacja po interakcji</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#animacja-po-interakcji" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#animation-from-interactions" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -546,8 +543,8 @@
 
     <h3>2.4 Nawigacja</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-4-1" onchange="updateProgress()" />
       <label for="2-4-1" class="criterion-content">
+        <input type="checkbox" id="2-4-1" onchange="updateProgress()" />
         <strong>2.4.1 Możliwość pominięcia bloków</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#mozliwosc-pominiecia-blokow" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#bypass-blocks" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -556,8 +553,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-4-2" onchange="updateProgress()" />
       <label for="2-4-2" class="criterion-content">
+        <input type="checkbox" id="2-4-2" onchange="updateProgress()" />
         <strong>2.4.2 Tytuły stron</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#tytu-strony" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#page-titled" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -566,8 +563,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-4-3" onchange="updateProgress()" />
       <label for="2-4-3" class="criterion-content">
+        <input type="checkbox" id="2-4-3" onchange="updateProgress()" />
         <strong>2.4.3 Kolejność fokusu</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#kolejnosc-fokusu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#focus-order" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -576,8 +573,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-4-4" onchange="updateProgress()" />
       <label for="2-4-4" class="criterion-content">
+        <input type="checkbox" id="2-4-4" onchange="updateProgress()" />
         <strong>2.4.4 Cel linku (w kontekście)</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#cel-acza-w-kontekscie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#link-purpose-in-context" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -586,8 +583,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="2-4-5" onchange="updateProgress()" />
       <label for="2-4-5" class="criterion-content">
+        <input type="checkbox" id="2-4-5" onchange="updateProgress()" />
         <strong>2.4.5 Wiele dróg</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#wiele-drog" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#multiple-ways" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -597,8 +594,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="2-4-6" onchange="updateProgress()" />
       <label for="2-4-6" class="criterion-content">
+        <input type="checkbox" id="2-4-6" onchange="updateProgress()" />
         <strong>2.4.6 Nagłówki i etykiety</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#nag-owki-i-etykiety" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#headings-and-labels" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -607,8 +604,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="2-4-7" onchange="updateProgress()" />
       <label for="2-4-7" class="criterion-content">
+        <input type="checkbox" id="2-4-7" onchange="updateProgress()" />
         <strong>2.4.7 Widoczny fokus</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#widoczny-fokus" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#focus-visible" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -617,8 +614,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-4-8" onchange="updateProgress()" />
       <label for="2-4-8" class="criterion-content">
+        <input type="checkbox" id="2-4-8" onchange="updateProgress()" />
         <strong>2.4.8 Lokalizacja</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#lokalizacja" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#location" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -628,8 +625,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-4-9" onchange="updateProgress()" />
       <label for="2-4-9" class="criterion-content">
+        <input type="checkbox" id="2-4-9" onchange="updateProgress()" />
         <strong>2.4.9 Cel łącza (z samego łącza)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#cel-acza-z-samego-acza" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#link-purpose-link-only" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -639,8 +636,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-4-10" onchange="updateProgress()" />
       <label for="2-4-10" class="criterion-content">
+        <input type="checkbox" id="2-4-10" onchange="updateProgress()" />
         <strong>2.4.10 Nagłówki sekcji</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#nag-owki-sekcji" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#section-headings" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -649,8 +646,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="2-4-11" onchange="updateProgress()" />
       <label for="2-4-11" class="criterion-content">
+        <input type="checkbox" id="2-4-11" onchange="updateProgress()" />
         <strong>2.4.11 Fokus niezasłonięty (Minimum)</strong><span class="level-badge level-aa">AA</span>
         <a href="https://wcag.lepszyweb.pl/#focus-not-obscured-minimum" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb (WCAG 2.2)</a><br />
         Element z fokusem nie może być całkowicie zasłonięty przez inne
@@ -659,8 +656,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-4-12" onchange="updateProgress()" />
       <label for="2-4-12" class="criterion-content">
+        <input type="checkbox" id="2-4-12" onchange="updateProgress()" />
         <strong>2.4.12 Fokus niezasłonięty (rozszerzony)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://wcag.lepszyweb.pl/#focus-not-obscured-enhanced" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb (WCAG 2.2)</a><br />
         Element z fokusem nie może być w ogóle zasłonięty.
@@ -668,8 +665,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-4-13" onchange="updateProgress()" />
       <label for="2-4-13" class="criterion-content">
+        <input type="checkbox" id="2-4-13" onchange="updateProgress()" />
         <strong>2.4.13 Wygląd focusu</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://wcag.lepszyweb.pl/#focus-appearance" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb (WCAG 2.2)</a><br />
         Wskaźnik fokusu musi być wyraźny i widoczny dla wszystkich elementów
@@ -679,8 +676,8 @@
 
     <h3>2.5 Modalności wprowadzania</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-5-1" onchange="updateProgress()" />
       <label for="2-5-1" class="criterion-content">
+        <input type="checkbox" id="2-5-1" onchange="updateProgress()" />
         <strong>2.5.1 Gesty dotykowe</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#gesty-dotykowe" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#pointer-gestures" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -689,8 +686,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-5-2" onchange="updateProgress()" />
       <label for="2-5-2" class="criterion-content">
+        <input type="checkbox" id="2-5-2" onchange="updateProgress()" />
         <strong>2.5.2 Anulowanie wskaźnika</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#rezygnacja-ze-wskazania" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#pointer-cancellation" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -699,8 +696,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-5-3" onchange="updateProgress()" />
       <label for="2-5-3" class="criterion-content">
+        <input type="checkbox" id="2-5-3" onchange="updateProgress()" />
         <strong>2.5.3 Etykieta w nazwie</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#etykieta-w-nazwie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#label-in-name" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -709,8 +706,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="2-5-4" onchange="updateProgress()" />
       <label for="2-5-4" class="criterion-content">
+        <input type="checkbox" id="2-5-4" onchange="updateProgress()" />
         <strong>2.5.4 Aktywacja przez ruch</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#aktywacja-przez-ruch" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#motion-actuation" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -719,8 +716,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-5-5" onchange="updateProgress()" />
       <label for="2-5-5" class="criterion-content">
+        <input type="checkbox" id="2-5-5" onchange="updateProgress()" />
         <strong>2.5.5 Rozmiar celu dotykowego</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#rozmiar-celu-dotykowego" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#target-size-enhanced" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -729,8 +726,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="2-5-6" onchange="updateProgress()" />
       <label for="2-5-6" class="criterion-content">
+        <input type="checkbox" id="2-5-6" onchange="updateProgress()" />
         <strong>2.5.6 Równoległy mechanizm wprowadzania</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#rownoleg-y-mechanizm-wprowadzania-danych" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#concurrent-input-mechanisms" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -739,8 +736,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="2-5-7" onchange="updateProgress()" />
       <label for="2-5-7" class="criterion-content">
+        <input type="checkbox" id="2-5-7" onchange="updateProgress()" />
         <strong>2.5.7 Ruchy przeciągania</strong><span class="level-badge level-aa">AA</span>
         <a href="https://wcag.lepszyweb.pl/#dragging-movements" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb (WCAG 2.2)</a><br />
         Drag-and-drop musi mieć prostszą alternatywę.
@@ -748,8 +745,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="2-5-8" onchange="updateProgress()" />
       <label for="2-5-8" class="criterion-content">
+        <input type="checkbox" id="2-5-8" onchange="updateProgress()" />
         <strong>2.5.8 Rozmiar celu (Minimum)</strong><span class="level-badge level-aa">AA</span>
         <a href="https://wcag.lepszyweb.pl/#target-size-minimum" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb (WCAG 2.2)</a><br />
         Elementy klikalne muszą być min. 24×24 piksele.
@@ -763,8 +760,8 @@
 
     <h3>3.1 Czytelność</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="3-1-1" onchange="updateProgress()" />
       <label for="3-1-1" class="criterion-content">
+        <input type="checkbox" id="3-1-1" onchange="updateProgress()" />
         <strong>3.1.1 Język strony</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#jezyk-strony" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#language-of-page" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -773,8 +770,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="3-1-2" onchange="updateProgress()" />
       <label for="3-1-2" class="criterion-content">
+        <input type="checkbox" id="3-1-2" onchange="updateProgress()" />
         <strong>3.1.2 Język części</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#jezyk-czesci" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#language-of-parts" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -783,8 +780,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-1-3" onchange="updateProgress()" />
       <label for="3-1-3" class="criterion-content">
+        <input type="checkbox" id="3-1-3" onchange="updateProgress()" />
         <strong>3.1.3 Nietypowe słowa</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#nietypowe-s-owa" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#unusual-words" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -793,8 +790,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-1-4" onchange="updateProgress()" />
       <label for="3-1-4" class="criterion-content">
+        <input type="checkbox" id="3-1-4" onchange="updateProgress()" />
         <strong>3.1.4 Skróty</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#skroty" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#abbreviations" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -803,8 +800,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-1-5" onchange="updateProgress()" />
       <label for="3-1-5" class="criterion-content">
+        <input type="checkbox" id="3-1-5" onchange="updateProgress()" />
         <strong>3.1.5 Poziom umiejętności czytania</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#poziom-umiejetnosci-czytania" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#reading-level" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -813,8 +810,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-1-6" onchange="updateProgress()" />
       <label for="3-1-6" class="criterion-content">
+        <input type="checkbox" id="3-1-6" onchange="updateProgress()" />
         <strong>3.1.6 Wymowa</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#wymowa" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#pronunciation" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -824,8 +821,8 @@
 
     <h3>3.2 Przewidywalność</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="3-2-1" onchange="updateProgress()" />
       <label for="3-2-1" class="criterion-content">
+        <input type="checkbox" id="3-2-1" onchange="updateProgress()" />
         <strong>3.2.1 Po otrzymaniu fokusu</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#po-otrzymaniu-fokusu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#on-focus" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -834,8 +831,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="3-2-2" onchange="updateProgress()" />
       <label for="3-2-2" class="criterion-content">
+        <input type="checkbox" id="3-2-2" onchange="updateProgress()" />
         <strong>3.2.2 Przy wprowadzaniu danych</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#podczas-wprowadzania-danych" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#on-input" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -845,8 +842,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="3-2-3" onchange="updateProgress()" />
       <label for="3-2-3" class="criterion-content">
+        <input type="checkbox" id="3-2-3" onchange="updateProgress()" />
         <strong>3.2.3 Spójna nawigacja</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#spojna-nawigacja" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#consistent-navigation" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -856,8 +853,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="3-2-4" onchange="updateProgress()" />
       <label for="3-2-4" class="criterion-content">
+        <input type="checkbox" id="3-2-4" onchange="updateProgress()" />
         <strong>3.2.4 Spójna identyfikacja</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#spojna-identyfikacja" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#consistent-identification" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -867,8 +864,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-2-5" onchange="updateProgress()" />
       <label for="3-2-5" class="criterion-content">
+        <input type="checkbox" id="3-2-5" onchange="updateProgress()" />
         <strong>3.2.5 Zmiana na żądanie</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#zmiana-na-zadanie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#change-on-request" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -877,8 +874,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="3-2-6" onchange="updateProgress()" />
       <label for="3-2-6" class="criterion-content">
+        <input type="checkbox" id="3-2-6" onchange="updateProgress()" />
         <strong>3.2.6 Spójna pomoc</strong><span class="level-badge level-a">A</span>
         <a href="https://wcag.lepszyweb.pl/#consistent-help" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb (WCAG 2.2)</a><br />
         Mechanizm pomocy musi być umieszczony w spójny sposób na różnych
@@ -888,8 +885,8 @@
 
     <h3>3.3 Pomoc przy wprowadzaniu danych</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="3-3-1" onchange="updateProgress()" />
       <label for="3-3-1" class="criterion-content">
+        <input type="checkbox" id="3-3-1" onchange="updateProgress()" />
         <strong>3.3.1 Identyfikacja błędu</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#identyfikacja-bledu" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#error-identification" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -898,8 +895,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="3-3-2" onchange="updateProgress()" />
       <label for="3-3-2" class="criterion-content">
+        <input type="checkbox" id="3-3-2" onchange="updateProgress()" />
         <strong>3.3.2 Etykiety lub instrukcje</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#etykiety-lub-instrukcje" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#labels-or-instructions" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -908,8 +905,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="3-3-3" onchange="updateProgress()" />
       <label for="3-3-3" class="criterion-content">
+        <input type="checkbox" id="3-3-3" onchange="updateProgress()" />
         <strong>3.3.3 Sugestie korekty błędu</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#sugestie-korekty-b-edow" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#error-suggestion" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -918,8 +915,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="3-3-4" onchange="updateProgress()" />
       <label for="3-3-4" class="criterion-content">
+        <input type="checkbox" id="3-3-4" onchange="updateProgress()" />
         <strong>3.3.4 Zapobieganie błędom (kontekst prawny, finansowy)</strong><span class="level-badge level-aa">AA</span>
         <a href="hhttps://www.w3.org/Translations/WCAG21-pl/#zapobieganie-b-edom-prawnym-finansowym-w-danych" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#error-prevention-legal-financial-data" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -929,8 +926,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-3-5" onchange="updateProgress()" />
       <label for="3-3-5" class="criterion-content">
+        <input type="checkbox" id="3-3-5" onchange="updateProgress()" />
         <strong>3.3.5 Pomoc</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#pomoc" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#help" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -939,8 +936,8 @@
     </div>
 
     <div class="criterion" data-level="AAA">
-      <input type="checkbox" id="3-3-6" onchange="updateProgress()" />
       <label for="3-3-6" class="criterion-content">
+        <input type="checkbox" id="3-3-6" onchange="updateProgress()" />
         <strong>3.3.6 Zapobieganie błędom (wszystkim)</strong><span class="level-badge level-aaa">AAA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#zapobieganie-b-edom-wszystkim" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#error-prevention-all" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -985,8 +982,8 @@
 
     <h3>4.1 Kompatybilność</h3>
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="4-1-1" onchange="updateProgress()" />
       <label for="4-1-1" class="criterion-content">
+        <input type="checkbox" id="4-1-1" onchange="updateProgress()" />
         <strong>4.1.1 Parsowanie</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#kompatybilnosc" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#parsing" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -996,8 +993,8 @@
     </div>
 
     <div class="criterion" data-level="A">
-      <input type="checkbox" id="4-1-2" onchange="updateProgress()" />
       <label for="4-1-2" class="criterion-content">
+        <input type="checkbox" id="4-1-2" onchange="updateProgress()" />
         <strong>4.1.2 Nazwa, rola, wartość</strong><span class="level-badge level-a">A</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#nazwa-rola-wartosc" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#name-role-value" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />
@@ -1007,8 +1004,8 @@
     </div>
 
     <div class="criterion" data-level="AA">
-      <input type="checkbox" id="4-1-3" onchange="updateProgress()" />
       <label for="4-1-3" class="criterion-content">
+        <input type="checkbox" id="4-1-3" onchange="updateProgress()" />
         <strong>4.1.3 Komunikaty o stanie</strong><span class="level-badge level-aa">AA</span>
         <a href="https://www.w3.org/Translations/WCAG21-pl/#komunikaty-o-stanie" target="_blank" class="wcag-link wcag-w3c">🌐 W3C</a>
         <a href="https://wcag.lepszyweb.pl/#status-messages" target="_blank" class="wcag-link wcag-lepszy">📘 LepszyWeb</a><br />

@@ -7,6 +7,8 @@ const activeFilters = {
 // Dodajemy globalne zmienne do przechowywania wyników wyszukiwania
 let searchMatches = [];
 let searchMatchIndex = -1;
+// Flaga używana do tymczasowego wyciszenia automatycznego przejmowania fokusu
+let suppressFocusOnChange = false;
 
 // Centralna inicjalizacja
 window.addEventListener('DOMContentLoaded', function() {
@@ -25,6 +27,14 @@ function init() {
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
         if (toggle) toggle.checked = true;
+    } else if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+        if (toggle) toggle.checked = false;
+    }
+    // Nasłuchuj zmiany checkboxa (jeśli istnieje) i synchronizuj motyw
+    if (toggle) {
+        // preferujemy addEventListener zamiast inline onchange — ale inline może zostać zachowane
+        toggle.addEventListener('change', toggleTheme);
     }
 
     // Wczytaj zapisany postęp (synchronous localStorage)
@@ -33,12 +43,9 @@ function init() {
     // Podłącz listener'y checkboxów i przycisków
     addCheckboxListeners();
 
-    const btnCheckAll = document.getElementById("btnCheckAll");
-    if (btnCheckAll) btnCheckAll.addEventListener("click", checkAll);
-
-    // Podłącz pozostałe przyciski (jeśli istnieją)
-    const btnUncheck = document.getElementById("btnUncheckAll");
-    if (btnUncheck) btnUncheck.addEventListener("click", uncheckAll);
+    // Jeden przycisk do zaznacz/odznacz wszystkiego
+    const btnToggleAll = document.getElementById("btnToggleAll");
+    if (btnToggleAll) btnToggleAll.addEventListener("click", toggleAll);
 
     const btnSave = document.getElementById("btnSaveProgress");
     if (btnSave) btnSave.addEventListener("click", saveProgress);
@@ -75,20 +82,48 @@ function init() {
     // Uczyń etykiety kryteriów fokusowalne i obsłuż Enter/Space
     document.querySelectorAll('.criterion-content').forEach(label => {
         label.setAttribute('tabindex', '0');
+
+        // Zadbaj, by etykieta miała semantykę kontrolki checkbox dla czytników
+        label.setAttribute('role', 'checkbox');
+        // aria-checked będzie ustawiane dalej w addCheckboxListeners oraz przy kliknięciach/keydown
+
+        // Klawiatura: użyj .click() zamiast modyfikować .checked bezpośrednio.
+        // Dzięki temu uruchomiony zostanie normalny flow (focus/change itd.).
         label.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 const forId = label.getAttribute('for') || label.htmlFor;
-                // jeśli to nie label-for (np. div > label), znajdź input w obrębie
                 let checkbox = null;
                 if (forId) checkbox = document.getElementById(forId);
                 if (!checkbox) checkbox = label.querySelector('input[type="checkbox"]') || label.parentElement.querySelector('input[type="checkbox"]');
                 if (checkbox) {
-                    checkbox.checked = !checkbox.checked;
-                    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-                    checkbox.focus();
+                    // Wywołaj click() — bezpośrednie ustawianie .checked mogło kolidować z domyślnym zachowaniem.
+                    checkbox.click();
+                    // nie ustawiamy fokus na checkbox — fokus pozostanie na label.
                 }
             }
+        });
+
+        // Kliknięcie: jeśli input jest potomkiem label -> zaufaj domyślnemu zachowaniu przeglądarki
+        // (unikamy ręcznego toggle, aby nie robić double-toggle). Jeśli input nie jest potomkiem,
+        // wywołaj checkbox.click().
+        label.addEventListener('click', (e) => {
+            // Jeśli kliknięto link wewnątrz etykiety, nie przełączaj
+            if (e.target.closest('a')) return;
+            // Jeśli kliknięto bezpośrednio na input, pozwól domyślnemu zachowaniu
+            if (e.target.tagName && e.target.tagName.toLowerCase() === 'input') return;
+
+            const forId = label.getAttribute('for') || label.htmlFor;
+            let checkbox = null;
+            if (forId) checkbox = document.getElementById(forId);
+            if (!checkbox) checkbox = label.querySelector('input[type="checkbox"]') || label.parentElement.querySelector('input[type="checkbox"]');
+            if (!checkbox) return;
+
+            // Jeśli checkbox jest potomkiem label -> do nothing (default handler will toggle).
+            if (label.contains(checkbox)) return;
+
+            // W przeciwnym przypadku symuluj kliknięcie na checkbox.
+            checkbox.click();
         });
     });
 
@@ -114,12 +149,25 @@ function init() {
  function addCheckboxListeners() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
-        // ustaw klasę zgodnie ze stanem (np. po wczytaniu)
         const criterion = checkbox.closest('.criterion');
+        // ustaw klasę zgodnie ze stanem (np. po wczytaniu)
         if (checkbox.checked) {
             criterion && criterion.classList.add('checked');
         } else {
             criterion && criterion.classList.remove('checked');
+        }
+
+        // Powiązana etykieta (label[for] lub fallback .criterion-content)
+        const assocLabel = document.querySelector(`label[for="${checkbox.id}"]`) || (criterion ? criterion.querySelector('.criterion-content') : null);
+        if (assocLabel) {
+            // synchronizuj aria-checked
+            assocLabel.setAttribute('aria-checked', String(!!checkbox.checked));
+            // usuwamy checkbox z tab-order -> TAB nie skoczy na checkbox
+            checkbox.tabIndex = -1;
+            // jeśli checkbox dostanie fokus (np. przez kliknięcie), natychmiast przywróć fokus na etykietę
+            checkbox.addEventListener('focus', () => {
+                try { assocLabel.focus(); } catch (e) { /* noop */ }
+            });
         }
 
         checkbox.addEventListener('change', function() {
@@ -129,7 +177,15 @@ function init() {
             } else {
                 criterion && criterion.classList.remove('checked');
             }
-            // Zapisz lokalnie (synchronous)
+            // Aktualizuj aria-checked na etykiecie powiązanej z tym checkboxem
+            const labelFor = document.querySelector(`label[for="${this.id}"]`) || (criterion ? criterion.querySelector('.criterion-content') : null);
+            if (labelFor) labelFor.setAttribute('aria-checked', String(!!this.checked));
+            // Upewnij się, że fokus pozostaje na etykiecie (jeśli istnieje),
+            // chyba że tymczasowo wyciszyliśmy automatyczne przejmowanie fokusu.
+            if (!suppressFocusOnChange && labelFor && document.activeElement !== labelFor) {
+                try { labelFor.focus(); } catch (e) { /* noop */ }
+            }
+            // Zapisz lokalnie i odśwież UI
             saveProgressToStorage();
             updateProgress();
         });
@@ -463,15 +519,17 @@ function init() {
     
     // Przygotuj mapę nagłówków (h2/h3) — czy nagłówek pasuje do wyszukiwania
     const headerMatches = new Map();
+    // Pomijamy nagłówki wewnątrz sekcji podsumowania/legendy
     document.querySelectorAll('h2, h3').forEach(h => {
-        const txt = h.textContent.toLowerCase();
-        const matches = txt.includes(searchTerm);
-        headerMatches.set(h, matches);
-        if (matches) {
-            // podświetl fragment w nagłówku
-            highlightText(h, searchTerm);
-        }
-    });
+        if (h.closest('#summaryContainer') || h.closest('.summary-container') || h.closest('.legend')) return;
+         const txt = h.textContent.toLowerCase();
+         const matches = txt.includes(searchTerm);
+         headerMatches.set(h, matches);
+         if (matches) {
+             // podświetl fragment w nagłówku
+             highlightText(h, searchTerm);
+         }
+     });
     
     const criteria = document.querySelectorAll('.criterion');
     
@@ -536,6 +594,10 @@ function findSectionHeader(el) {
  * @returns {void}
  */
  function highlightText(element, searchTerm) {
+    // Nie podświetlamy treści wewnątrz sekcji podsumowania, legend, itp.
+    if (element.closest && (element.closest('#summaryContainer') || element.closest('.summary-container') || element.closest('.legend'))) {
+        return;
+    }
     const walker = document.createTreeWalker(
         element,
         NodeFilter.SHOW_TEXT,
@@ -705,71 +767,94 @@ function acceptHighlighted() {
     if (checkbox) {
         checkbox.checked = !checkbox.checked;
         checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-        checkbox.focus();
-        // odśwież wyniki po zmianie stanu (np. filtrowanie po visibility)
-        updateSearchMatches();
+        // Nie fokusujemy checkboxa — fokus ustawiamy na powiązaną etykietę/pole
+        const labelFor = document.querySelector(`label[for="${checkbox.id}"]`) || (checkbox.closest('.criterion') ? checkbox.closest('.criterion').querySelector('.criterion-content') : null);
+        if (labelFor) {
+            labelFor.setAttribute('aria-checked', String(!!checkbox.checked));
+            try { labelFor.focus(); } catch (e) { /* noop */ }
+        }
+    }
+}
+
+/* Zastąp lub dodaj tę funkcję (upewnij się, że nie ma duplikatu) */
+function toggleTheme() {
+    const toggle = document.getElementById('themeToggle');
+    // jeśli mamy checkbox -> użyj jego stanu jako źródła prawdy
+    if (toggle) {
+        if (toggle.checked) {
+            document.body.classList.add('dark-mode');
+            try { localStorage.setItem('theme', 'dark'); } catch (e) { /* noop */ }
+        } else {
+            document.body.classList.remove('dark-mode');
+            try { localStorage.setItem('theme', 'light'); } catch (e) { /* noop */ }
+        }
+        // aktualizuj aria/state jeśli potrzebne
+        toggle.setAttribute('aria-pressed', String(!!toggle.checked));
         return;
     }
-
-    // Jeśli nie checkbox, spróbuj kliknąć link w obrębie (jeśli potrzebne)
-    const link = el.querySelector('a[href]');
-    if (link) {
-        link.focus();
-        // nie wykonujemy automatycznego navigation; pozostawiamy focus (bez otwierania)
-    }
+    // fallback: jeśli checkbox nie istnieje, przełącz klasę (stare zachowanie)
+    document.body.classList.toggle('dark-mode');
+    try {
+        if (document.body.classList.contains('dark-mode')) localStorage.setItem('theme', 'dark');
+        else localStorage.setItem('theme', 'light');
+    } catch (e) { /* noop */ }
 }
 
 /**
- * Aktualizuje tablicę wyników wyszukiwania (etykiety widocznych kryteriów)
- * oraz koryguje obecny indeks jeżeli przekracza nowe bounds.
+ * Przełącza widoczne checkboxy: jeśli przynajmniej jeden jest NIEzaznaczony -> zaznacz wszystkie widoczne,
+ * w przeciwnym razie -> odznacz wszystkie widoczne.
  */
-function updateSearchMatches() {
-    const searchTerm = document.getElementById('searchBox')?.value.toLowerCase() || '';
-    if (searchTerm === '') {
-        searchMatches = [];
-        searchMatchIndex = -1;
-        // usuń ewentualne wizualne podświetlenia
-        document.querySelectorAll('.search-current').forEach(n => n.classList.remove('search-current'));
-        return;
+function toggleAll() {
+    const visibleCheckboxes = Array.from(document.querySelectorAll('.criterion:not(.hidden) input[type="checkbox"]'));
+    if (visibleCheckboxes.length === 0) return;
+
+    // Blokujemy wymuszanie fokusu ze strony handlera change podczas masowej operacji,
+    // dzięki czemu fokus pozostanie na przycisku, a nie "przeskoczy" do ostatniego pola.
+    suppressFocusOnChange = true;
+    const anyUnchecked = visibleCheckboxes.some(cb => !cb.checked);
+    if (anyUnchecked) {
+        visibleCheckboxes.forEach(cb => {
+            cb.checked = true;
+            cb.closest('.criterion') && cb.closest('.criterion').classList.add('checked');
+            cb.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+    } else {
+        visibleCheckboxes.forEach(cb => {
+            cb.checked = false;
+            cb.closest('.criterion') && cb.closest('.criterion').classList.remove('checked');
+            cb.dispatchEvent(new Event('change', { bubbles: true }));
+        });
     }
-    // lista etykiet widocznych kryteriów
-    searchMatches = Array.from(document.querySelectorAll('.criterion:not(.hidden) label'));
-    if (searchMatchIndex >= searchMatches.length) searchMatchIndex = searchMatches.length - 1;
-    if (searchMatches.length === 0) searchMatchIndex = -1;
+    // Po zakończeniu operacji przywróć normalne zachowanie i ustaw fokus z powrotem na przycisk
+    suppressFocusOnChange = false;
+    const btnToggleAll = document.getElementById("btnToggleAll");
+    if (btnToggleAll) {
+        try { btnToggleAll.focus(); } catch (e) { /* noop */ }
+        // Zapis i odświeżenie UI (change listeners już wykonały updateProgress w większości przypadków)
+        saveProgressToStorage();
+        updateProgress();
+        // Aktualizuj aria-pressed na przycisku
+        btnToggleAll.setAttribute('aria-pressed', String(!anyUnchecked));
+    } else {
+        // fallback jeśli nie znaleziono przycisku
+        saveProgressToStorage();
+        updateProgress();
+    }
 }
 
- /**
- * Przełącza motyw (light/dark) i zapisuje preferencję w localStorage.
- * @returns {void}
- */
- function toggleTheme() {
-    const body = document.body;
-    const toggle = document.getElementById('themeToggle');
-    
-    body.classList.toggle('dark-mode');
-    
-    if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
- }
-
- /**
- * Inicjalizuje przycisk "back to top": pokazuje go po przewinięciu i obsługuje kliknięcie.
- * @returns {void}
- */
+// Przywrócony handler dla przycisku "Back to top" — pokazuje przycisk po przewinięciu i obsługuje kliknięcie.
 function setupBackToTop() {
     const btn = document.getElementById('backToTop');
     if (!btn) return;
 
-    // Kliknięcie - płynne przewinięcie na górę
+    // Kliknięcie - płynne przewinięcie na górę i przywrócenie fokusu na główną zawartość
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        // po przewinięciu przenieś fokus na główną treść dla accesibility
         const main = document.getElementById('mainContent');
-        if (main) main.focus({ preventScroll: true });
+        if (main) {
+            try { main.focus({ preventScroll: true }); } catch (err) { /* noop */ }
+        }
     });
 
     // Pokaż/ukryj przy przewijaniu
@@ -782,8 +867,43 @@ function setupBackToTop() {
         }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
-    // initial check
+    // initial state
     onScroll();
 }
 
+/**
+ * Aktualizuje tablicę wyników wyszukiwania (etykiety widocznych kryteriów)
+ * oraz koryguje obecny indeks jeżeli przekracza nowe bounds.
+ */
+function updateSearchMatches() {
+    const searchTerm = document.getElementById('searchBox')?.value.toLowerCase() || '';
 
+    if (searchTerm === '') {
+        // brak frazy -> wyczyść wyniki i zresetuj index; usuń ewentualne wizualne podświetlenia
+        searchMatches = [];
+        searchMatchIndex = -1;
+        document.querySelectorAll('.search-current').forEach(n => n.classList.remove('search-current'));
+        return;
+    }
+
+    // Wybieramy tylko pola kryteriów (.criterion-content) należące do widocznych .criterion
+    // i wykluczamy elementy, które mogłyby znajdować się w sekcjach „podsumowania” lub innych
+    // nieistotnych kontenerach (np. #summaryContainer).
+    const nodes = Array.from(document.querySelectorAll('.criterion:not(.hidden) .criterion-content'))
+        .filter(el => {
+            // filtr bezpieczeństwa: element musi być elementem fokusowalnym/wyświetlonym
+            if (!(el instanceof Element)) return false;
+            // Wykluczamy wyniki wewnątrz podsumowania / legendy itp.
+            if (el.closest('#summaryContainer') || el.closest('.summary-container') || el.closest('.legend')) return false;
+            return true;
+        });
+
+    searchMatches = nodes;
+
+    // Skoryguj indeks — nie zmieniamy -1 (użytkownik wybiera pierwszy Enter-em),
+    // ale upewniamy się, że nie wychodzi poza zakres.
+    if (searchMatchIndex >= searchMatches.length) {
+        searchMatchIndex = searchMatches.length - 1;
+    }
+    if (searchMatches.length === 0) searchMatchIndex = -1;
+}
